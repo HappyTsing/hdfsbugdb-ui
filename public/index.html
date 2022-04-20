@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <!-- <%= BASE_URL %> 指的是当前public目录 -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <!-- webpack一个插件实现的功能，会从package.json中拿name，来作为title。也就是网页标题 -->
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <!-- 当浏览器不支持script时，会跳出noscript定义的内容，如果支持的话不会显示。 -->
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
     </noscript>
+    <!-- 容器 -->
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
