@@ -5,5 +5,8 @@
 <script>
 export default {
   name: "HomeView",
+  // mounted() {
+  //   console.log("mounted");
+  // },
 };
 </script>

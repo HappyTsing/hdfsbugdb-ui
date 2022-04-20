@@ -1,17 +1,30 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/Home";
 import SearchView from "@/views/Search";
+import TestView from "@/views/Test";
 
 const routes = [
   {
     path: "/",
-    name: "home",
     component: HomeView,
+    redirect: "/home",
+    children: [
+      {
+        path: "home",
+        name: "home",
+        component: HomeView,
+      },
+    ],
   },
   {
     path: "/search",
     name: "search",
     component: SearchView,
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: TestView,
   },
 ];
 
