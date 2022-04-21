@@ -1,18 +1,16 @@
 <template>
-  <svg-icon icon-class="bug" class-name="bug-style" />
-
   <el-row :gutter="40" class="panel-group">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
         <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="bug" class-name="bug-style" />
+          <svg-icon icon-class="hdfs" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">New Visits</div>
-          <count-to
+          <count-up
             :start-val="0"
-            :end-val="102400"
-            :duration="2600"
+            :end-val="477"
+            :duration="2"
             class="card-panel-num"
           />
         </div>
@@ -22,8 +20,12 @@
 </template>
 
 <script>
+import CountUp from "vue-countup-v3";
 export default {
   name: "TestView",
+  components: {
+    CountUp,
+  },
 };
 </script>
 
@@ -113,25 +115,6 @@ export default {
       .card-panel-num {
         font-size: 20px;
       }
-    }
-  }
-}
-
-@media (max-width: 550px) {
-  .card-panel-description {
-    display: none;
-  }
-
-  .card-panel-icon-wrapper {
-    float: none !important;
-    width: 100%;
-    height: 100%;
-    margin: 0 !important;
-
-    .svg-icon {
-      display: block;
-      margin: 14px auto !important;
-      float: none !important;
     }
   }
 }

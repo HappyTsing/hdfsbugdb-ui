@@ -1,12 +1,13 @@
 <template>
   <div class="home">home</div>
-
-  <svg-icon icon-class="bug" class-name="bug-style" />
+  <PanelGroup></PanelGroup>
 </template>
 
 <script>
+import PanelGroup from "./components/PanelGroup.vue";
 export default {
   name: "HomeView",
+  components: { PanelGroup },
   // mounted() {
   //   console.log("mounted");
   // },

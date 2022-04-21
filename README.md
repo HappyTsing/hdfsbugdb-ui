@@ -50,6 +50,9 @@ yarn add axios
 yarn add element-plus
 
 yarn add svg-sprite-loader -D
+
+# vue-count-to 在vue3无法使用，在issue里看到别人打包的v3版本
+yarn add vue-countup-v3
 ```
 
 ## 项目框架
@@ -157,7 +160,7 @@ export default {
 路由组件：路由组件的内容会最终显示在 Content 中
 
 - Home：显示统计信息
-  - 第一行
+  - 第一行 @Home/components/PanelGroup.vue
     - 研究的数据库类型 HDFS
     - issue 的时间跨度 19/03/30 - 22/03/01
     - issue 数量 477
