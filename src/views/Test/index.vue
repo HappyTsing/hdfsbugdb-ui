@@ -1,121 +1,76 @@
 <template>
-  <el-row :gutter="40" class="panel-group">
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
-        <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="hdfs" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">New Visits</div>
-          <count-up
-            :start-val="0"
-            :end-val="477"
-            :duration="2"
-            class="card-panel-num"
-          />
-        </div>
-      </div>
-    </el-col>
-  </el-row>
+  <!-- 高度默认为0，因此必须设置高度 -->
+  <div ref="testref" id="myid"></div>
 </template>
 
 <script>
-import CountUp from "vue-countup-v3";
+import { inject, ref, onMounted } from "vue";
+
 export default {
   name: "TestView",
-  components: {
-    CountUp,
+  setup() {
+    const testref = ref();
+
+    // let myChart = $echarts.init(testref.value);
+    onMounted(() => {
+      let $echarts = inject("echarts");
+      let myChart = $echarts.init(testref.value);
+      // console.log(this.$refs);
+      // console.log($echarts);
+      let option = {
+        xAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        },
+        yAxis: {
+          type: "value",
+        },
+        series: [
+          {
+            data: [150, 230, 224, 218, 135, 147, 260],
+            type: "line",
+          },
+        ],
+      };
+      myChart.setOption(option);
+    });
+
+    console.log(testref.value);
+    return { testref };
   },
+  // mounted() {
+  //   this.init();
+  // },
+  // methods: {
+  //   init() {
+  //     let $echarts = inject("echarts");
+  //     let myChart = $echarts.init(this.$refs.testref);
+  //     // console.log(this.$refs);
+  //     // console.log($echarts);
+  //     let option = {
+  //       xAxis: {
+  //         type: "category",
+  //         data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  //       },
+  //       yAxis: {
+  //         type: "value",
+  //       },
+  //       series: [
+  //         {
+  //           data: [150, 230, 224, 218, 135, 147, 260],
+  //           type: "line",
+  //         },
+  //       ],
+  //     };
+  //     myChart.setOption(option);
+  //   },
+  // },
 };
 </script>
 
-<style lang="scss" scoped>
-.panel-group {
-  margin-top: 18px;
-
-  .card-panel-col {
-    margin-bottom: 32px;
-  }
-
-  .card-panel {
-    height: 108px;
-    cursor: pointer;
-    font-size: 12px;
-    position: relative;
-    overflow: hidden;
-    color: #666;
-    background: #fff;
-    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.05);
-
-    &:hover {
-      .card-panel-icon-wrapper {
-        color: #fff;
-      }
-
-      .icon-people {
-        background: #40c9c6;
-      }
-
-      .icon-message {
-        background: #36a3f7;
-      }
-
-      .icon-money {
-        background: #f4516c;
-      }
-
-      .icon-shopping {
-        background: #34bfa3;
-      }
-    }
-
-    .icon-people {
-      color: #40c9c6;
-    }
-
-    .icon-message {
-      color: #36a3f7;
-    }
-
-    .icon-money {
-      color: #f4516c;
-    }
-
-    .icon-shopping {
-      color: #34bfa3;
-    }
-
-    .card-panel-icon-wrapper {
-      float: left;
-      margin: 14px 0 0 14px;
-      padding: 16px;
-      transition: all 0.38s ease-out;
-      border-radius: 6px;
-    }
-
-    .card-panel-icon {
-      float: left;
-      font-size: 48px;
-    }
-
-    .card-panel-description {
-      float: right;
-      font-weight: bold;
-      margin: 26px;
-      margin-left: 0px;
-
-      .card-panel-text {
-        line-height: 18px;
-        color: rgba(0, 0, 0, 0.45);
-        font-size: 16px;
-        margin-bottom: 12px;
-      }
-
-      .card-panel-num {
-        font-size: 20px;
-      }
-    }
-  }
+<style>
+#myid {
+  width: 500px;
+  height: 500px;
 }
 </style>

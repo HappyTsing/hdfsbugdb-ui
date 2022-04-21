@@ -19,7 +19,8 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">Time Span</div>
-          <count-up
+          <span class="card-panel-num">19/03-22/03</span>
+          <!-- <count-up
             :start-val="0"
             :end-val="22"
             :duration="2"
@@ -32,7 +33,7 @@
             <template #prefix>
               <span>19/03-</span>
             </template>
-          </count-up>
+          </count-up> -->
         </div>
       </div>
     </el-col>
@@ -57,7 +58,9 @@
         <div class="card-panel-icon-wrapper icon-shopping">
           <svg-icon icon-class="update" class-name="card-panel-icon" />
         </div>
+
         <div class="card-panel-description">
+          <!-- TODO Last update固定 -->
           <div class="card-panel-text">Last Update</div>
           <count-up
             :start-val="0"

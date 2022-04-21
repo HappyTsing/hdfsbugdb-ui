@@ -168,3 +168,113 @@ export default {
   - 第二行
     - 一个横跨的大表，展示
 - Search
+
+# 技巧
+
+## echarts
+
+### echarts 官网的示例代码
+
+根据官网的示例代码，我们需要先引入 echarts，然后通过 id 获取 DOM 来初始化。
+
+```javascript
+<template>
+  <div ref="myChart" id="myDiv></div>
+</template>
+<script>
+import * as echarts from "echarts";
+export default{
+  mounted(){
+      let chartDom = document.getElementById("main");
+      let myChart = echarts.init(chartDom);
+  }
+}
+</script>
+```
+
+### 全局引入
+
+如果每次使用 echart ，都需要引入 echart 就很麻烦，应该全局引入。
+
+vue3 和 vue2 不同，vue2 中将 echarts 放到原型链中，但 vue3 无法这么做。
+
+但 vue3 提供了 `provide` 和 `inject`。
+
+在 `App.vue` 中使用 `provide` 为后代们提供数据。
+
+```javascript
+<script>
+import { provide } from "vue";
+import * as echarts from "echarts";
+import axios from "axios";
+export default {
+  name: "App",
+  setup() {
+    provide("echarts", echarts);
+    provide("axios", axios);
+  },
+};
+</script>
+```
+
+然后在需要使用 echarts 的子组件中，使用 `inject` 接收导入的 echarts。通常我们将其放入 `$echarts` 变量中。
+
+```javascript
+<script>
+import {inject} from "vue"
+export default {
+  setup(){
+    let $echarts = inject("echarts");
+  }
+}
+</script>
+```
+
+### vue 中优化后的代码
+
+此外，在 vue 中我们不应该直接操作 DOM，因此更好的办法是使用 vue 的 `ref` 。
+
+```javascript
+<div ref="myChart" id="myDiv></div>
+let myEcharts = $echarts.init(this.$refs.myChart);
+```
+
+此处是我们已经通过 `inject` 引入了 echarts，并用 `$echarts` 这个变量接受了它，然后调用它的 `init` 方法，该方法需要传入一个 `dom` 节点，作为绘图的容器。我们用 `ref` 获取该容器，将其传进去。效果是和上面的 `getElementById()` 方法一样的。
+
+### vue setup 中使用 ref
+
+`setup` 是 vue3 中的新特性，在 `setup` 中是无法使用 this 的，因此也无法获取 `this.$refs` 。
+此时需要引入 vue3 中新的响应式函数 `ref()` ，这个函数时可以让一个变量变为响应式。
+
+理论上来说，他和 DOM 引用的 `ref` 属性是没啥关系的，但当 `ref()` 中传入 `null` 或 `空值` ，**并且** 接受变量的变量名(如 refDom)等于 `ref` 属性的 `值` 的时候，可以通过 `refDom.value` 来获取 dom 对象。
+
+还有一个注意点，refDom 需要在 setup 中返回。
+
+```
+<template>
+<div ref="myChart" id="myDiv></div>
+</template>
+```
+
+```javascript
+<script>
+  import { inject, ref, onMounted } from "vue";
+  export default{
+    setup() {
+    let $echarts = inject("echarts");
+    onMounted(() => {
+      let $echarts = inject("echarts");
+
+      // let myEcharts = $echarts.init(this.$refs.myChart);  //setup中无法使用
+      const myChart = ref();  // 变量名的值 需要与 ref 的属性值相同
+      let Chart = $echarts.init(myChart.value);
+      let option = {
+          ...
+      };
+      Chart.setOption(option);
+
+      // 返回变量名
+      return { myChart }
+  }
+</script>
+```
