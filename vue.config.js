@@ -45,4 +45,24 @@ module.exports = defineConfig({
       .options({ symbolId: "icon-[name]" })
       .end();
   },
+  /* 方案一，不推荐，代理所有请求
+  devServer: {
+    proxy: "http://localhost:3001",
+  },
+  */
+
+  /* 方案二 */
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3001",
+        ws: true, // 用于支持websocket
+        changeOrigin: true, // 代理服务器 告诉 服务端 它（代理服务器） 的端口号是和服务端一样的。
+        // 例如：前端8080端口， 后端3001端口。如果changeOrigin为true，则服务器收到的请求是来自3001端口的，如果为false，则服务器收到的请求是8080端口的.
+        // 可以理解为端口欺骗。本质是控制请求头中的host值
+
+        // ws 和 changeOrigin 两个配置默认为true，因此可以不配置。
+      },
+    },
+  },
 });
