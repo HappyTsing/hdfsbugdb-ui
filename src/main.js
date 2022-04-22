@@ -14,11 +14,14 @@ import "@/icons/index.js";
 
 const app = createApp(App);
 // 全局组件直接全局注册
-app.component(FooterComp.name, FooterComp);
-app.component(HeaderComp.name, HeaderComp);
-app.component(ContentComp.name, ContentComp);
-app.component(SvgIcon.name, SvgIcon);
+app
+  .component(FooterComp.name, FooterComp)
+  .component(HeaderComp.name, HeaderComp)
+  .component(ContentComp.name, ContentComp)
+  .component(SvgIcon.name, SvgIcon);
 
 // 使用插件
 app.use(store).use(router);
+
+// 挂载
 app.mount("#app");

@@ -278,3 +278,17 @@ let myEcharts = $echarts.init(this.$refs.myChart);
   }
 </script>
 ```
+
+### 组件式编程优雅使用 echart
+
+建立一个新的文件 `composables/useEcharts.js`，该文件对外暴露一个方法：`useEcharts(option,domid)` ，此后我们在组件中，只需要导入该文件，直接使用该方法，传入 `option` 和 `domid` 即可。
+
+# 掉接口
+
+```javascript
+let res = "";
+onMounted(async () => {
+  res = await getData();
+  console.log(res);
+});
+```

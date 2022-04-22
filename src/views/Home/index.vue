@@ -10,7 +10,7 @@
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
-          <raddar-chart />
+          <ClassifyVisual></ClassifyVisual>
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
@@ -60,10 +60,11 @@
   </div>
 </template>
 <script>
-import PanelGroup from "./components/PanelGroup.vue";
+import PanelGroup from "./components/PanelGroup";
+import ClassifyVisual from "./components/ClassifyVisual";
 export default {
   name: "HomeView",
-  components: { PanelGroup },
+  components: { PanelGroup, ClassifyVisual },
   // mounted() {
   //   console.log("mounted");
   // },
