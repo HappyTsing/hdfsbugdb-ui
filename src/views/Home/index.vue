@@ -1,68 +1,26 @@
 <template>
   <div class="dashboard-editor-container">
-    <github-corner class="github-corner" />
-
     <PanelGroup></PanelGroup>
-    <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
-      <ClassifyVisual></ClassifyVisual>
-    </el-row>
+    <!-- <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
+      <SingleChart></SingleChart>
+    </el-row> -->
 
-    <el-row :gutter="32">
-      <el-col :xs="24" :sm="24" :lg="8">
-        <div class="chart-wrapper"></div>
-      </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
+    <el-row :gutter="24">
+      <el-col :span="16">
         <div class="chart-wrapper">
-          <pie-chart />
+          <SingleChart></SingleChart>
         </div>
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="8">
-        <div class="chart-wrapper">
-          <bar-chart />
-        </div>
-      </el-col>
-    </el-row>
-
-    <el-row :gutter="8">
-      <el-col
-        :xs="{ span: 24 }"
-        :sm="{ span: 24 }"
-        :md="{ span: 24 }"
-        :lg="{ span: 12 }"
-        :xl="{ span: 12 }"
-        style="padding-right: 8px; margin-bottom: 30px"
-      >
-        <transaction-table />
-      </el-col>
-      <el-col
-        :xs="{ span: 24 }"
-        :sm="{ span: 12 }"
-        :md="{ span: 12 }"
-        :lg="{ span: 6 }"
-        :xl="{ span: 6 }"
-        style="margin-bottom: 30px"
-      >
-        <todo-list />
-      </el-col>
-      <el-col
-        :xs="{ span: 24 }"
-        :sm="{ span: 12 }"
-        :md="{ span: 12 }"
-        :lg="{ span: 6 }"
-        :xl="{ span: 6 }"
-        style="margin-bottom: 30px"
-      >
-        <box-card />
-      </el-col>
+      <el-col :span="8"><div class="chart-wrapper" /></el-col>
     </el-row>
   </div>
 </template>
 <script>
 import PanelGroup from "./components/PanelGroup";
-import ClassifyVisual from "./components/ClassifyVisual";
+import SingleChart from "./components/SingleChart";
 export default {
   name: "HomeView",
-  components: { PanelGroup, ClassifyVisual },
+  components: { PanelGroup, SingleChart },
 };
 </script>
 <style lang="scss" scoped>
@@ -70,13 +28,6 @@ export default {
   padding: 32px;
   background-color: rgb(240, 242, 245);
   position: relative;
-
-  .github-corner {
-    position: absolute;
-    top: 0px;
-    border: 0;
-    right: 0;
-  }
 
   .chart-wrapper {
     background: #fff;

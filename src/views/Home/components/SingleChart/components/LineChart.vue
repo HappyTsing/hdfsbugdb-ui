@@ -1,39 +1,48 @@
 <template>
-  <div id="bar-dom" class="chart"></div>
+  <div id="line-dom" class="chart"></div>
   <!-- <router-link to="/search">xxx</router-link> -->
 </template>
 
 <script>
 // 组合式API
-import useEcharts from "@/composables/useEcharts";
+import useEcharts from "../composables/useEchartsForSingleChart.js";
 
 export default {
-  name: "BarChart",
+  name: "LineChart",
   setup() {
     let option = {
       xAxis: {
         type: "category",
         data: [],
-        // 解决下标间隔显示问题 0强制显示所有标签 1间隔显示
+        // data: ["Mon","Tue"],
         axisLabel: {
           interval: 0,
         },
-        // data: ["Mon","Tue"],
       },
+
       yAxis: {
-        type: "value",
+        axisTick: {
+          show: false,
+        },
       },
       series: [
         {
           data: [],
           // data: [100,200],
-          type: "bar",
-          stack: "vistors",
-          barWidth: "50%",
-
+          type: "line",
+          smooth: "false",
+          animationDuration: 1200,
+          animationEasing: "cubicInOut",
           itemStyle: {
             normal: {
-              color: "#61bca4",
+              color: "#3888fa",
+              lineStyle: {
+                color: "#3888fa",
+                width: 2,
+              },
+              areaStyle: {
+                color: "#f3f8ff",
+              },
             },
           },
         },
@@ -41,9 +50,9 @@ export default {
       tooltip: {
         trigger: "axis",
         axisPointer: {
-          // 坐标轴指示器，坐标轴触发有效
-          type: "shadow", // 默认为直线，可选为：'line' | 'shadow'
+          type: "cross",
         },
+        padding: [5, 10],
         borderWidth: 0,
         backgroundColor: "rgba(152,152,152,0.9)",
         textStyle: {
@@ -51,8 +60,7 @@ export default {
         },
       },
     };
-    // 加一个参数，在画之前销毁。
-    useEcharts(option, "bar-dom", "Bar");
+    useEcharts(option, "line-dom", "Line");
   },
 };
 </script>

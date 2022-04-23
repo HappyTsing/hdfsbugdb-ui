@@ -301,3 +301,7 @@ onMounted(async () => {
 - tooltip：提示框组件。当你滑到相应位置的时候显示内容
 - legend：图例组件
 -
+
+# 待办事项
+
+TODO 热力图：任选两个属性，比如 code、quality。用热力图画，横坐标 code、纵坐标 quality，交集就是他们同时出现的次数

@@ -19,7 +19,7 @@ import { computed } from "vue";
 
 export default {
   components: { PieChart, LineChart, BarChart, ChooseBar },
-  name: "ClassifyVisual",
+  name: "SingleChart",
   setup() {
     const store = useStore();
     const dataSource = computed(() => store.state.chooseBar.dataSource);

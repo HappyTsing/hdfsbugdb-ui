@@ -4,7 +4,7 @@
 
 <script>
 // 组合式API
-import useEcharts from "@/composables/useEcharts";
+import useEcharts from "../composables/useEchartsForSingleChart.js";
 export default {
   name: "PieChart",
   setup() {

@@ -1,10 +1,13 @@
 import { inject, onMounted, onUnmounted, computed, watch } from "vue";
+import { useStore } from "vuex";
 import { getEchartData } from "@/api/echarts";
 require("echarts/theme/macarons");
 // chartType in ["Bar","Line","Pie"]
 export default function useEchart(option, domID, chartType) {
   let chart, echartData;
   let $echarts = inject("echarts");
+  const store = useStore();
+  const dataSource = computed(() => store.state.chooseBar.dataSource);
 
   function initChart(option) {
     let $echarts = inject("echarts");
@@ -41,9 +44,33 @@ export default function useEchart(option, domID, chartType) {
       option.series[0].data = seriesData;
     }
 
+    /* 添加标题*/
+    // option.title = {
+    //   text: dataSource,
+    //   left: "center",
+    //   textStyle: {
+    //     color: "#e25d6f",
+    //     fontWeight: "bold",
+    //   },
+    // };
+
+    /* 调整图片距离容器两边的距离 */
+    option.grid = {
+      left: "4%",
+      right: "1%",
+    };
     return option;
   }
+  watch(dataSource, (newValue) => {
+    option = initOption(option, newValue, echartData);
+    console.log(option);
 
+    chart.setOption(option);
+  });
+
+  // 因为vuex在mounted之后才开始（似乎是这样），因此初始化时无法获取vuex的echartData，只能直接调用API获取。 其实每次都可以单独调用一次API，只是用vuex的话方便一点。
+  // vuex中的数据在@/views/Home/ClassifyVisual/index.js 挂载的时候调用API获取
+  // update: 数据不存储到vuex中
   onMounted(() => {
     getEchartData().then((res) => {
       echartData = res.data;
