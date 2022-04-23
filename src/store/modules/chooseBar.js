@@ -2,10 +2,10 @@ export default {
   namespaced: true,
   state: {
     // 指定显示哪个类型的表
-    chartType: "Bar",
+    chartType: "Line",
 
     // 指定数据源
-    dataSource: "Code",
+    dataSource: "Consequence",
 
     // 数据源的具体数据
     echartData: {},

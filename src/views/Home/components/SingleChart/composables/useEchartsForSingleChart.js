@@ -3,7 +3,7 @@ import { useStore } from "vuex";
 import { getEchartData } from "@/api/echarts";
 require("echarts/theme/macarons");
 // chartType in ["Bar","Line","Pie"]
-export default function useEchart(option, domID, chartType) {
+export default function useEcharts(option, domID, chartType) {
   let chart, echartData;
   let $echarts = inject("echarts");
   const store = useStore();
@@ -43,16 +43,6 @@ export default function useEchart(option, domID, chartType) {
       }
       option.series[0].data = seriesData;
     }
-
-    /* 添加标题*/
-    // option.title = {
-    //   text: dataSource,
-    //   left: "center",
-    //   textStyle: {
-    //     color: "#e25d6f",
-    //     fontWeight: "bold",
-    //   },
-    // };
 
     /* 调整图片距离容器两边的距离 */
     option.grid = {

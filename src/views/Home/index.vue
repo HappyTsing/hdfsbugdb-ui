@@ -11,16 +11,20 @@
           <SingleChart></SingleChart>
         </div>
       </el-col>
-      <el-col :span="8"><div class="chart-wrapper" /></el-col>
+      <el-col :span="8"
+        ><div class="chart-wrapper">
+          <ComplexChart></ComplexChart></div
+      ></el-col>
     </el-row>
   </div>
 </template>
 <script>
 import PanelGroup from "./components/PanelGroup";
 import SingleChart from "./components/SingleChart";
+import ComplexChart from "./components/ComplexChart";
 export default {
   name: "HomeView",
-  components: { PanelGroup, SingleChart },
+  components: { PanelGroup, SingleChart, ComplexChart },
 };
 </script>
 <style lang="scss" scoped>
@@ -33,6 +37,7 @@ export default {
     background: #fff;
     padding: 16px 16px 0;
     margin-bottom: 32px;
+    height: 320px;
   }
 }
 

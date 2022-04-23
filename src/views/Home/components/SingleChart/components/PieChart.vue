@@ -9,10 +9,6 @@ export default {
   name: "PieChart",
   setup() {
     let option = {
-      // title: {
-      //   text: "Quality",
-      //   left: "center",
-      // },
       tooltip: {
         trigger: "item",
         formatter: "{a} <br/>{b} : {c} ({d}%)",
