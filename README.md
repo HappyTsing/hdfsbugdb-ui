@@ -283,7 +283,7 @@ let myEcharts = $echarts.init(this.$refs.myChart);
 
 建立一个新的文件 `composables/useEcharts.js`，该文件对外暴露一个方法：`useEcharts(option,domid)` ，此后我们在组件中，只需要导入该文件，直接使用该方法，传入 `option` 和 `domid` 即可。
 
-# 掉接口
+# 调用接口
 
 ```javascript
 let res = "";
@@ -292,3 +292,12 @@ onMounted(async () => {
   console.log(res);
 });
 ```
+
+# echarts 常用配置
+
+- xAxis
+- yAxis
+- grid：直角坐标系内绘图网格
+- tooltip：提示框组件。当你滑到相应位置的时候显示内容
+- legend：图例组件
+-

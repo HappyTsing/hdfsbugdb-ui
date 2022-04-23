@@ -4,14 +4,12 @@
 
     <PanelGroup></PanelGroup>
     <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
-      <line-chart :chart-data="lineChartData" />
+      <ClassifyVisual></ClassifyVisual>
     </el-row>
 
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
-        <div class="chart-wrapper">
-          <ClassifyVisual></ClassifyVisual>
-        </div>
+        <div class="chart-wrapper"></div>
       </el-col>
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">

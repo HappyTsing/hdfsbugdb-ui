@@ -4,6 +4,11 @@ import { getEchartData } from "@/api/echarts";
 require("echarts/theme/macarons");
 // chartType in ["Bar","Line","Pie"]
 export default function useEchart(option, domID, chartType) {
+  let chart, echartData;
+  let $echarts = inject("echarts");
+  const store = useStore();
+  const dataSource = computed(() => store.state.chooseBar.dataSource);
+
   function initChart(option) {
     let $echarts = inject("echarts");
     var chartDom = document.getElementById(domID);
@@ -18,53 +23,51 @@ export default function useEchart(option, domID, chartType) {
       chart = null;
     }
   }
-  let chart;
-
-  const store = useStore();
-  const dataSource = computed(() => store.state.chooseBar.dataSource);
-  const echartData = computed(() => store.state.chooseBar.echartData);
 
   function initOption(option, dataSource, echartData) {
-    // 第一次初始化的时候，也就是mounted的时候，vuex还未被初始化，因此无法拿到echartData的数据，因此需要先备份一次option。
-    // 这会造成，页面中的图一开始是空白的。
-    let option_back = option;
-    try {
-      let typeData = echartData[dataSource.toLowerCase()];
+    /* 添加数据 */
+    let typeData = echartData[dataSource.toLowerCase()];
 
-      if (chartType === "Bar" || chartType === "Line") {
-        let xAxisData = Object.keys(typeData);
-        let seriesData = Object.values(typeData);
-        option.xAxis.data = xAxisData;
-        option.series[0].data = seriesData;
-      } else if (chartType === "Pie") {
-        let seriesData = [];
-        for (let name in typeData) {
-          seriesData.push({
-            value: typeData[name],
-            name: name,
-          });
-        }
-        option.series[0].data = seriesData;
+    if (chartType === "Bar" || chartType === "Line") {
+      let xAxisData = Object.keys(typeData);
+      let seriesData = Object.values(typeData);
+      option.xAxis.data = xAxisData;
+      option.series[0].data = seriesData;
+    } else if (chartType === "Pie") {
+      let seriesData = [];
+      for (let name in typeData) {
+        seriesData.push({
+          value: typeData[name],
+          name: name,
+        });
       }
-      return option;
-    } catch (error) {
-      return option_back;
+      option.series[0].data = seriesData;
     }
+
+    /* 添加标题*/
+    // option.title = {
+    //   text: dataSource,
+    //   left: "center",
+    //   textStyle: {
+    //     color: "#e25d6f",
+    //     fontWeight: "bold",
+    //   },
+    // };
+    return option;
   }
   watch(dataSource, (newValue) => {
-    // option = initOption(option, newValue, echartData.value);
-    // TODO 删除echartDAta
-    option = initOption(option, newValue, data_from_api);
+    option = initOption(option, newValue, echartData);
+    console.log(option);
+
     chart.setOption(option);
   });
-  let $echarts = inject("echarts");
-  let data_from_api;
 
   // 因为vuex在mounted之后才开始（似乎是这样），因此初始化时无法获取vuex的echartData，只能直接调用API获取。 其实每次都可以单独调用一次API，只是用vuex的话方便一点。
   // vuex中的数据在@/views/Home/ClassifyVisual/index.js 挂载的时候调用API获取
+  // update: 数据不存储到vuex中
   onMounted(() => {
     getEchartData().then((res) => {
-      data_from_api = res.data;
+      echartData = res.data;
       option = initOption(option, dataSource.value, res.data);
       let chartDom = document.getElementById(domID);
       chart = $echarts.init(chartDom, "macarons");
@@ -75,5 +78,12 @@ export default function useEchart(option, domID, chartType) {
   onUnmounted(() => {
     destoryChart(chart);
   });
+
+  /* 计划是激活的时候，重新画一遍。但是似乎在这里拿不到变量，因此也无法重新画了。此处只能不开启 <keep-alvie></keep-alvie> 来实现这种功能了。坏处是每次都要请求数据。
+  onActivated(() => {
+    // option = initOption(option, dataSource.value, echartData);
+    // chart.setOption(option);
+  });
+  */
   return { chart, initChart, destoryChart };
 }

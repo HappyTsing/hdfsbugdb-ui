@@ -9,10 +9,10 @@ export default {
   name: "PieChart",
   setup() {
     let option = {
-      title: {
-        text: "Quality",
-        left: "center",
-      },
+      // title: {
+      //   text: "Quality",
+      //   left: "center",
+      // },
       tooltip: {
         trigger: "item",
         formatter: "{a} <br/>{b} : {c} ({d}%)",
@@ -27,21 +27,15 @@ export default {
           type: "pie",
           radius: [15, 95],
           center: ["50%", "38%"],
-          top: "25%",
+          top: "15%",
           roseType: "area",
           // data: [
           //   { value: 30, name: "rose 1" },
           //   { value: 28, name: "rose 2" },
-          //   { value: 26, name: "rose 3" },
-          //   { value: 24, name: "rose 4" },
-          //   { value: 22, name: "rose 5" },
-          //   { value: 20, name: "rose 6" },
-          //   { value: 18, name: "rose 7" },
-          //   { value: 16, name: "rose 8" },
           // ],
           data: [],
           animationEasing: "cubicInOut",
-          animationDuration: 2600,
+          animationDuration: 1000,
         },
       ],
     };

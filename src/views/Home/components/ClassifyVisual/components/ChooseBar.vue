@@ -1,21 +1,35 @@
 <template>
-  <el-select v-model="dataValue" class="m-2" placeholder="Select" size="small">
-    <el-option
-      v-for="item in dataOptions"
-      :key="item.dataValue"
-      :label="item.label"
-      :value="item.dataValue"
-    />
-  </el-select>
+  <div style="display: inline-block">
+    <el-select
+      v-model="dataValue"
+      class="m-2"
+      placeholder="Select"
+      size="small"
+    >
+      <el-option
+        v-for="item in dataOptions"
+        :key="item.dataValue"
+        :label="item.label"
+        :value="item.dataValue"
+      />
+    </el-select>
+  </div>
 
-  <el-select v-model="chartValue" class="m-2" placeholder="Select" size="small">
-    <el-option
-      v-for="item in chartOptions"
-      :key="item.chartValue"
-      :label="item.label"
-      :value="item.chartValue"
-    />
-  </el-select>
+  <div style="display: inline-block; margin-left: 20px">
+    <el-select
+      v-model="chartValue"
+      class="m-2"
+      placeholder="Select"
+      size="small"
+    >
+      <el-option
+        v-for="item in chartOptions"
+        :key="item.chartValue"
+        :label="item.label"
+        :value="item.chartValue"
+      />
+    </el-select>
+  </div>
 </template>
 
 <script setup>
@@ -43,15 +57,6 @@ const chartValue = computed({
   },
 });
 
-// let res = "";
-// onMounted(async () => {
-//   res = await getData();
-//   console.log(res);
-// });
-
-// async function getchartValue(classtype) {
-//   return await getEchartData()
-// }
 const dataOptions = [
   {
     dataValue: "Significance",

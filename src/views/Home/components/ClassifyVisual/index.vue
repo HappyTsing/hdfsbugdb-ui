@@ -15,7 +15,7 @@ import BarChart from "./components/BarChart";
 import ChooseBar from "./components/ChooseBar";
 
 import { useStore } from "vuex";
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 
 export default {
   components: { PieChart, LineChart, BarChart, ChooseBar },
@@ -26,9 +26,6 @@ export default {
     const chartType = computed(() => store.state.chooseBar.chartType);
     const echartData = computed(() => store.state.chooseBar.echartData);
 
-    onMounted(() => {
-      store.dispatch("chooseBar/storeData");
-    });
     return { chartType, dataSource, echartData };
   },
 };

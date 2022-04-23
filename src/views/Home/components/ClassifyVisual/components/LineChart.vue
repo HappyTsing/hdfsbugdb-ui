@@ -14,17 +14,51 @@ export default {
       xAxis: {
         type: "category",
         data: [],
+        // data: ["Mon","Tue"],
+        axisLabel: {
+          interval: 0,
+        },
       },
+
       yAxis: {
-        type: "value",
+        axisTick: {
+          show: false,
+        },
       },
       series: [
         {
           data: [],
+          // data: [100,200],
           type: "line",
           smooth: "false",
+          animationDuration: 1200,
+          animationEasing: "cubicInOut",
+          itemStyle: {
+            normal: {
+              color: "#3888fa",
+              lineStyle: {
+                color: "#3888fa",
+                width: 2,
+              },
+              areaStyle: {
+                color: "#f3f8ff",
+              },
+            },
+          },
         },
       ],
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "cross",
+        },
+        padding: [5, 10],
+        borderWidth: 0,
+        backgroundColor: "rgba(152,152,152,0.9)",
+        textStyle: {
+          color: "white",
+        },
+      },
     };
     useEcharts(option, "line-dom", "Line");
   },
