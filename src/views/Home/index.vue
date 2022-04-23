@@ -65,9 +65,6 @@ import ClassifyVisual from "./components/ClassifyVisual";
 export default {
   name: "HomeView",
   components: { PanelGroup, ClassifyVisual },
-  // mounted() {
-  //   console.log("mounted");
-  // },
 };
 </script>
 <style lang="scss" scoped>

@@ -1,15 +1,10 @@
 <template>
   <ChooseBar></ChooseBar>
-
-  <template v-if="chartValue === 'Pie'">
-    <PieChart></PieChart>
-  </template>
-  <template v-else-if="chartValue === 'Line'">
-    <LineChart></LineChart>
-  </template>
-  <template v-else-if="chartValue === 'Bar'">
-    <BarChart></BarChart>
-  </template>
+  <!-- <keep-alive> -->
+  <PieChart v-if="chartType === 'Pie'"></PieChart>
+  <LineChart v-else-if="chartType === 'Line'"></LineChart>
+  <BarChart v-else></BarChart>
+  <!-- </keep-alive> -->
 </template>
 
 <script>
@@ -27,13 +22,14 @@ export default {
   name: "ClassifyVisual",
   setup() {
     const store = useStore();
-    const dataValue = computed(() => store.state.chooseBar.dataChoosed);
-    const chartValue = computed(() => store.state.chooseBar.chartChoosed);
+    const dataSource = computed(() => store.state.chooseBar.dataSource);
+    const chartType = computed(() => store.state.chooseBar.chartType);
+    const echartData = computed(() => store.state.chooseBar.echartData);
 
     onMounted(() => {
       store.dispatch("chooseBar/storeData");
     });
-    return { chartValue, dataValue };
+    return { chartType, dataSource, echartData };
   },
 };
 </script>

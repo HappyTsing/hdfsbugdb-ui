@@ -29,22 +29,23 @@ export default {
           center: ["50%", "38%"],
           top: "25%",
           roseType: "area",
-          data: [
-            { value: 30, name: "rose 1" },
-            { value: 28, name: "rose 2" },
-            { value: 26, name: "rose 3" },
-            { value: 24, name: "rose 4" },
-            { value: 22, name: "rose 5" },
-            { value: 20, name: "rose 6" },
-            { value: 18, name: "rose 7" },
-            { value: 16, name: "rose 8" },
-          ],
+          // data: [
+          //   { value: 30, name: "rose 1" },
+          //   { value: 28, name: "rose 2" },
+          //   { value: 26, name: "rose 3" },
+          //   { value: 24, name: "rose 4" },
+          //   { value: 22, name: "rose 5" },
+          //   { value: 20, name: "rose 6" },
+          //   { value: 18, name: "rose 7" },
+          //   { value: 16, name: "rose 8" },
+          // ],
+          data: [],
           animationEasing: "cubicInOut",
           animationDuration: 2600,
         },
       ],
     };
-    useEcharts(option, "pie-dom");
+    useEcharts(option, "pie-dom", "Pie");
   },
 };
 </script>

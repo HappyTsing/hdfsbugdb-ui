@@ -3,21 +3,26 @@ export default {
   namespaced: true,
   state: {
     // 指定显示哪个类型的表
-    chartChoosed: "",
+    chartType: "Bar",
 
     // 指定数据源
-    dataChoosed: "",
+    dataSource: "Code",
 
     // 数据源的具体数据
     echartData: {},
+
+    // xAxisData: ["Mon", "Tue", "Wed"],
+    // seriesData: [123, 222, 444],
   },
   mutations: {
     chooseChartType(state, chartType) {
-      state.chartChoosed = chartType;
+      state.chartType = chartType;
     },
-    chooseDataSource(state, dataType) {
-      state.dataChoosed = dataType;
+    chooseDataSource(state, dataSource) {
+      state.dataSource = dataSource;
     },
+
+    // 获取所有的数据
     storeData(state, data) {
       state.echartData = data;
     },

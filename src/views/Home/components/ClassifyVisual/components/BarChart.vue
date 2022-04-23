@@ -6,20 +6,21 @@
 <script>
 // 组合式API
 import useEcharts from "@/composables/useEcharts";
+
 export default {
-  name: "LineChart",
+  name: "BarChart",
   setup() {
     let option = {
       xAxis: {
         type: "category",
-        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        data: [],
       },
       yAxis: {
         type: "value",
       },
       series: [
         {
-          data: [120, 200, 150, 80, 70, 110, 130],
+          data: [],
           type: "bar",
           showBackground: true,
           backgroundStyle: {
@@ -28,7 +29,8 @@ export default {
         },
       ],
     };
-    useEcharts(option, "bar-dom");
+    // 加一个参数，在画之前销毁。
+    useEcharts(option, "bar-dom", "Bar");
   },
 };
 </script>

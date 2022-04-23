@@ -26,16 +26,17 @@ const store = useStore();
 
 const dataValue = computed({
   get() {
-    return store.state.chooseBar.dataChoosed;
+    return store.state.chooseBar.dataSource;
   },
   set(newVal) {
+    // 修改数据源
     store.commit("chooseBar/chooseDataSource", newVal);
   },
 });
 
 const chartValue = computed({
   get() {
-    return store.state.chooseBar.chartChoosed;
+    return store.state.chooseBar.chartType;
   },
   set(newVal) {
     store.commit("chooseBar/chooseChartType", newVal);
