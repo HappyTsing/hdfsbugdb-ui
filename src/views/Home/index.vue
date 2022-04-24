@@ -1,11 +1,11 @@
 <template>
-  <div class="dashboard-editor-container">
+  <div class="home">
     <PanelGroup></PanelGroup>
     <!-- <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
       <SingleChart></SingleChart>
     </el-row> -->
 
-    <el-row :gutter="24">
+    <el-row :gutter="24" class="visual-chart">
       <el-col :span="16">
         <div class="chart-wrapper">
           <SingleChart></SingleChart>
@@ -16,19 +16,22 @@
           <ComplexChart></ComplexChart></div
       ></el-col>
     </el-row>
+
+    <TableShow></TableShow>
   </div>
 </template>
 <script>
 import PanelGroup from "./components/PanelGroup";
 import SingleChart from "./components/SingleChart";
 import ComplexChart from "./components/ComplexChart";
+import TableShow from "./components/TableShow";
 export default {
   name: "HomeView",
-  components: { PanelGroup, SingleChart, ComplexChart },
+  components: { PanelGroup, SingleChart, ComplexChart, TableShow },
 };
 </script>
 <style lang="scss" scoped>
-.dashboard-editor-container {
+.home {
   padding: 32px;
   background-color: rgb(240, 242, 245);
   position: relative;

@@ -305,3 +305,6 @@ onMounted(async () => {
 # 待办事项
 
 TODO 热力图：任选两个属性，比如 code、quality。用热力图画，横坐标 code、纵坐标 quality，交集就是他们同时出现的次数
+
+TODO 目前规划在 home 中最下面放一个最新 bug 的表格，根据 issue 的 update 时间来排序，展示最新的几条，点一个按钮（更多 bug）可以跳转到一个新页面 Database，展示所有数据。用分页等技术。
+最后还有一个搜索 Search 功能。

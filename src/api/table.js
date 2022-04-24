@@ -1,8 +1,8 @@
 import request from "@/api/request.js";
 
-export function getEchartData() {
+export function getTableDataAll() {
   return request({
-    url: "/echart",
+    url: "/table/all",
     method: "get",
   });
 }
