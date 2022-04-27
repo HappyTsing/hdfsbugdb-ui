@@ -37,7 +37,7 @@ export default {
     const pageSize = 50;
 
     function getData() {
-      getTableDataAll().then((res) => {
+      getTableDataAll(1, 50).then((res) => {
         // es6 扩展运算符
         tableData.push(...res.data);
       });

@@ -55,7 +55,7 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       "/api": {
-        target: "http://localhost:3001",
+        target: "http://localhost:8081",
         ws: true, // 用于支持websocket
         changeOrigin: true, // 代理服务器 告诉 服务端 它（代理服务器） 的端口号是和服务端一样的。
         // 例如：前端8080端口， 后端3001端口。如果changeOrigin为true，则服务器收到的请求是来自3001端口的，如果为false，则服务器收到的请求是8080端口的.

@@ -6,7 +6,7 @@ import { ElMessage } from "element-plus";
 // 创建实例、配置基础URL
 const service = axios.create({
   baseURL: "/api",
-  timeout: 5000, // request timeout
+  timeout: 10000, // request timeout
 });
 
 // 拦截请求，将token带到请求体

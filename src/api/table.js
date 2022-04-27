@@ -1,8 +1,8 @@
 import request from "@/api/request.js";
 
-export function getTableDataAll() {
+export function getTableDataAll(pagesize, pagenum) {
   return request({
-    url: "/table/all",
+    url: `/issues/${pagesize}/${pagenum}`,
     method: "get",
   });
 }

@@ -26,7 +26,7 @@ export default function useEcharts(option, domID, chartType) {
 
   function initOption(option, dataSource, echartData) {
     /* 添加数据 */
-    let typeData = echartData[dataSource.toLowerCase()];
+    let typeData = echartData[dataSource];
 
     if (chartType === "Bar" || chartType === "Line") {
       let xAxisData = Object.keys(typeData);

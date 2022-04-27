@@ -1,32 +1,25 @@
 <template>
-  <el-button @click="resetDateFilter">reset date filter</el-button>
-  <el-button @click="clearFilter">reset all filters</el-button>
   <el-table :data="tableData" border style="width: 100%">
-    <el-table-column prop="id" label="ID" width="180" />
-    <el-table-column prop="cause" label="Cause" width="180" />
-    <el-table-column prop="impact" label="Impact" />
-    <el-table-column prop="significance" label="significance" />
-    <el-table-column prop="quality" label="quality" />
-    <el-table-column prop="component" label="quality" />
-    <el-table-column prop="consequence" label="consequence" />
-    <el-table-column prop="code" label="code" />
+    <el-table-column
+      v-for="c in columns"
+      :prop="c"
+      :label="c"
+      :key="c"
+    ></el-table-column>
+    <!-- <el-table-column prop="id" label="ID" width="180" /> -->
   </el-table>
   <el-pagination
     background
     hide-on-single-page
     v-model:current-page="currentPage"
-    page-size="20"
-    :total="22"
-    layout="prev, pager,
-  next"
+    :page-size="pageSize"
+    :total="total"
+    layout="prev, pager,next"
   />
-  <el-button @click="getData">获取数据</el-button>
-  <button @click="getPage">获取页码</button>
-  <!-- <h1>{{ tableData.array }}</h1> -->
 </template>
 
 <script>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import { getTableDataAll } from "/src/api/table.js";
 export default {
   setup() {
@@ -34,21 +27,56 @@ export default {
     // 让她变成响应式变量，这样分页的时候，重新获取数据，存放到tableData中，表格就会自动变化
     let tableData = reactive([]);
     let currentPage = ref(1);
+    let total = ref(0);
+    let pageSize = 20;
+    let columns = [
+      "id",
+      "IssueKey",
+      "Summary",
+      "Cause",
+      "Impact",
+      "Significance",
+      "Quality",
+      "Component",
+      "Consequence",
+      "Code",
+      "Link",
+      "CreatedTime",
+      "UpdateTime",
+    ];
 
     function getData() {
-      getTableDataAll().then((res) => {
+      getTableDataAll(pageSize, currentPage.value).then((res) => {
+        tableData.length = 0;
         // es6 扩展运算符
-        tableData.push(...res.data);
+        tableData.push(...res.data.data);
+
+        // 首次请求时，获取：①数据总条数 total ②data数据有哪些内容
+        if (currentPage.value === 1) {
+          total.value = res.data.total;
+        }
       });
-      // 调用后端接口，此处是否要与搜索结合？
     }
+
+    watch(currentPage, () => {
+      getData();
+    });
+
     function getPage() {
       console.log(currentPage);
     }
     onMounted(() => {
       getData();
     });
-    return { getData, tableData, currentPage, getPage };
+    return {
+      getData,
+      tableData,
+      currentPage,
+      getPage,
+      pageSize,
+      total,
+      columns,
+    };
   },
 };
 </script>
