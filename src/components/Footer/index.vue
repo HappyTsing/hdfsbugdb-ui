@@ -1,5 +1,6 @@
 <template>
-  <footer>这是footer</footer>
+  <!-- TODO 添加一个footer -->
+  <footer></footer>
 </template>
 
 <script>

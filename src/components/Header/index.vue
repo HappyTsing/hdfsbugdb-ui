@@ -1,48 +1,55 @@
 <template>
   <header>
-    <!-- TODO 待添加 -->
-    <div class="toadd">HDFSBUGDB</div>
-    <div class="search">
-      <el-input
-        v-model="input"
-        placeholder="Please input"
-        class="input-with-select"
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-demo"
+      mode="horizontal"
+      router
+      @select="handleSelect"
+    >
+      <el-menu-item
+        v-for="{ id, title, path } in menu_data"
+        :key="id"
+        :index="path"
+        >{{ title }}</el-menu-item
       >
-        <template #prepend>
-          <el-select v-model="select" placeholder="Select" style="width: 130px">
-            <el-option label="Significance" value="1" />
-            <el-option label="Quality" value="2" />
-            <el-option label="Conponent" value="3" />
-            <el-option label="Consequence" value="4" />
-            <el-option label="Code" value="5" />
-          </el-select>
-        </template>
-        <template #append>
-          <el-button :icon="Search" />
-        </template>
-      </el-input>
-    </div>
+    </el-menu>
   </header>
 </template>
+
 <script>
 import { Search } from "@element-plus/icons-vue";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 export default {
   name: "HeaderComp",
   setup() {
-    const input = ref("");
-    const select = ref("");
-    return { Search, input, select };
+    let input = ref();
+    let select = ref();
+    const menu_data = reactive([
+      {
+        id: 1,
+        title: "HOME",
+        path: "/home",
+      },
+      {
+        id: 2,
+        title: "ISSUES",
+        path: "/issues",
+      },
+    ]);
+
+    const activeIndex = ref("/home");
+    // const handleSelect = (key, keyPath) => {
+    //   console.log(key);
+    //   console.log(keyPath);
+    // };
+
+    return { Search, input, select, activeIndex, menu_data };
   },
 };
 </script>
 <style scoped>
 /* layout */
-
-* {
-  margin: 0;
-  padding: 0;
-}
 
 /* 输入框 */
 .input-with-select .el-input-group__prepend {
@@ -51,20 +58,14 @@ export default {
 
 /* 导航外部 */
 header {
-  padding: 10px 0;
   background-color: #ffffff;
-  border-bottom: 1px solid #dddfe5;
   position: fixed;
   top: 0;
   width: 100vw;
   z-index: 100;
 }
-.toadd {
-  display: inline-block;
-  width: 65vw;
-}
+
 .search {
   display: inline-block;
-  width: 30vw;
 }
 </style>

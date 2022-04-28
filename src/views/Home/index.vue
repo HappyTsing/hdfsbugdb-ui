@@ -17,17 +17,54 @@
       ></el-col>
     </el-row>
 
-    <TableShow></TableShow>
+    <TableShow
+      :columns_to_show="columns_to_show"
+      :pageSize="pageSize"
+    ></TableShow>
   </div>
 </template>
 <script>
 import PanelGroup from "./components/PanelGroup";
 import SingleChart from "./components/SingleChart";
 import ComplexChart from "./components/ComplexChart";
-import TableShow from "./components/TableShow";
 export default {
   name: "HomeView",
-  components: { PanelGroup, SingleChart, ComplexChart, TableShow },
+  components: { PanelGroup, SingleChart, ComplexChart },
+  data() {
+    return {
+      pageSize: 5,
+      columns_to_show: [
+        {
+          prop: "id",
+          width: "",
+        },
+        {
+          prop: "IssueKey",
+          width: "",
+        },
+        {
+          prop: "Quality",
+          width: "",
+        },
+        {
+          prop: "Component",
+          width: "",
+        },
+        {
+          prop: "Consequence",
+          width: "",
+        },
+        {
+          prop: "Code",
+          width: "",
+        },
+        {
+          prop: "UpdateTime",
+          width: "",
+        },
+      ],
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>

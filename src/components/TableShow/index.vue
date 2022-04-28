@@ -1,10 +1,11 @@
 <template>
-  <el-table :data="tableData" border style="width: 100%">
+  <el-table :data="tableData" style="width: 100%">
     <el-table-column
-      v-for="c in columns"
-      :prop="c"
-      :label="c"
-      :key="c"
+      v-for="{ prop, width } in columns_to_show"
+      :prop="prop"
+      :label="prop"
+      :key="prop"
+      :width="width"
     ></el-table-column>
     <!-- <el-table-column prop="id" label="ID" width="180" /> -->
   </el-table>
@@ -22,31 +23,23 @@
 import { ref, reactive, onMounted, watch } from "vue";
 import { getTableDataAll } from "/src/api/table.js";
 export default {
-  setup() {
+  name: "TableShow",
+  props: {
+    columns_to_show: Object,
+    pageSize: Number,
+  },
+  setup(props) {
     /* 存放显示的变量*/
     // 让她变成响应式变量，这样分页的时候，重新获取数据，存放到tableData中，表格就会自动变化
     let tableData = reactive([]);
     let currentPage = ref(1);
-    let total = ref(0);
-    let pageSize = 20;
-    let columns = [
-      "id",
-      "IssueKey",
-      "Summary",
-      "Cause",
-      "Impact",
-      "Significance",
-      "Quality",
-      "Component",
-      "Consequence",
-      "Code",
-      "Link",
-      "CreatedTime",
-      "UpdateTime",
-    ];
+    let total = ref();
+
+    // props传进来的是响应式的数据，不能直接用ES6的语法结构，会消除响应式。使用toRefs函数完成此操作
+    // const { columns_to_show,pageSize } = toRefs(props);
 
     function getData() {
-      getTableDataAll(pageSize, currentPage.value).then((res) => {
+      getTableDataAll(props.pageSize, currentPage.value).then((res) => {
         tableData.length = 0;
         // es6 扩展运算符
         tableData.push(...res.data.data);
@@ -73,9 +66,7 @@ export default {
       tableData,
       currentPage,
       getPage,
-      pageSize,
       total,
-      columns,
     };
   },
 };

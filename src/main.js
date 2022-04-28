@@ -4,6 +4,7 @@ import FooterComp from "@/components/Footer";
 import HeaderComp from "@/components/Header";
 import ContentComp from "@/components/Content";
 import SvgIcon from "@/components/SvgIcon"; // svg component
+import TableShow from "@/components/TableShow";
 
 // register globally
 import router from "./router";
@@ -18,7 +19,8 @@ app
   .component(FooterComp.name, FooterComp)
   .component(HeaderComp.name, HeaderComp)
   .component(ContentComp.name, ContentComp)
-  .component(SvgIcon.name, SvgIcon);
+  .component(SvgIcon.name, SvgIcon)
+  .component(TableShow.name, TableShow);
 
 // 使用插件
 app.use(store).use(router);
