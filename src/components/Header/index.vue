@@ -1,11 +1,11 @@
 <template>
   <header>
+    <!-- 当路径为 /home 或 /issues/HDFS-14222，都取根路径，即/home和/issues -->
     <el-menu
-      :default-active="activeIndex"
+      :default-active="'/' + $route.path.split('/')[1]"
       class="el-menu-demo"
       mode="horizontal"
       router
-      @select="handleSelect"
     >
       <el-menu-item
         v-for="{ id, title, path } in menu_data"
@@ -38,13 +38,12 @@ export default {
       },
     ]);
 
-    const activeIndex = ref("/home");
     // const handleSelect = (key, keyPath) => {
     //   console.log(key);
     //   console.log(keyPath);
     // };
 
-    return { Search, input, select, activeIndex, menu_data };
+    return { Search, input, select, menu_data };
   },
 };
 </script>

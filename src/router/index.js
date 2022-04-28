@@ -22,6 +22,11 @@ const routes = [
     component: IssuesView,
   },
   {
+    path: "/issues/:IssueKey",
+    name: "issueDetail",
+    component: () => import("@/views/Issues/components/IssueDetail"),
+  },
+  {
     path: "/test",
     name: "test",
     component: TestView,

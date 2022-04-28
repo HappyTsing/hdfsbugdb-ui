@@ -1,5 +1,6 @@
 <template>
   <div class="issues">
+    <h1>HDFSBUGDB</h1>
     <TableShow
       :columns_to_show="columns_to_show"
       :pageSize="pageSize"
@@ -11,35 +12,23 @@ export default {
   name: "IssuesView",
   data() {
     return {
-      pageSize: 5,
+      pageSize: 20,
       columns_to_show: [
         {
           prop: "id",
-          width: "%",
+          width: "100",
         },
         {
           prop: "IssueKey",
-          width: "",
+          width: "180",
         },
         {
-          prop: "Quality",
-          width: "",
-        },
-        {
-          prop: "Component",
-          width: "",
-        },
-        {
-          prop: "Consequence",
-          width: "",
-        },
-        {
-          prop: "Code",
+          prop: "Summary",
           width: "",
         },
         {
           prop: "UpdateTime",
-          width: "",
+          width: "180",
         },
       ],
     };
