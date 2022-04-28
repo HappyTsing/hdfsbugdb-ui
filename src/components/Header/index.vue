@@ -13,7 +13,11 @@
         :index="path"
         >{{ title }}</el-menu-item
       >
+      <el-input class="input" v-model="input" placeholder="Please input" />
+      <el-button class="button" type="primary" :icon="Search">Search</el-button>
     </el-menu>
+
+    <!-- search -->
   </header>
 </template>
 
@@ -64,7 +68,13 @@ header {
   z-index: 100;
 }
 
-.search {
+.input {
+  margin: auto 0;
   display: inline-block;
+  width: 200px;
+  margin-left: 65vw;
+}
+.button {
+  margin: auto 0;
 }
 </style>
