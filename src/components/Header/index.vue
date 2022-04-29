@@ -2,7 +2,7 @@
   <header>
     <!-- 当路径为 /home 或 /issues/HDFS-14222，都取根路径，即/home和/issues -->
     <el-menu
-      :default-active="'/' + $route.path.split('/')[1]"
+      :default-active="'/' + this.$route.path.split('/')[1]"
       class="el-menu-demo"
       mode="horizontal"
       router
@@ -14,21 +14,46 @@
         >{{ title }}</el-menu-item
       >
       <el-input class="input" v-model="input" placeholder="Please input" />
-      <el-button class="button" type="primary" :icon="Search">Search</el-button>
+      <el-button
+        class="button"
+        @click="handleSearch"
+        type="primary"
+        :icon="Search"
+        >Search</el-button
+      >
     </el-menu>
-
-    <!-- search -->
   </header>
 </template>
 
 <script>
 import { Search } from "@element-plus/icons-vue";
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
+
+// 使用ElMessage需要手动导入样式
+import { ElMessage } from "element-plus";
+import "element-plus/es/components/message/style/css";
 export default {
   name: "HeaderComp",
   setup() {
-    let input = ref();
-    let select = ref();
+    let input = ref("");
+    const router = useRouter();
+
+    function handleSearch() {
+      if (input.value.length === 0) {
+        ElMessage({
+          message: "Please enter your search content!",
+          type: "warning",
+          duration: 1000,
+        });
+      } else {
+        router.push({
+          path: `/issues/search/${input.value}`,
+          // query: { searchValue: input.value },
+        });
+      }
+    }
+
     const menu_data = reactive([
       {
         id: 1,
@@ -38,16 +63,11 @@ export default {
       {
         id: 2,
         title: "ISSUES",
-        path: "/issues",
+        path: "/issues/all",
       },
     ]);
 
-    // const handleSelect = (key, keyPath) => {
-    //   console.log(key);
-    //   console.log(keyPath);
-    // };
-
-    return { Search, input, select, menu_data };
+    return { Search, input, menu_data, handleSearch };
   },
 };
 </script>

@@ -20,12 +20,39 @@ const routes = [
     path: "/issues",
     name: "issues",
     component: IssuesView,
+    children: [
+      {
+        path: "all",
+        name: "issuesAll",
+        component: () => import("@/views/Issues/components/IssuesAll"),
+      },
+      {
+        path: "detail/:IssueKey",
+        name: "issueDetail",
+        component: () => import("@/views/Issues/components/IssueDetail"),
+      },
+      {
+        path: "search/:SearchValue",
+        name: "issuesSearch",
+        component: () => import("@/views/Issues/components/IssuesSearch"),
+      },
+    ],
   },
-  {
-    path: "/issues/:IssueKey",
-    name: "issueDetail",
-    component: () => import("@/views/Issues/components/IssueDetail"),
-  },
+  // {
+  //   path: "/issues/:IssueKey",
+  //   name: "issueDetail",
+  //   component: () => import("@/views/Issues/components/IssueDetail"),
+  // },
+  // {
+  //   path: "/issues/detail/:IssueKey",
+  //   name: "issueDetail",
+  //   component: () => import("@/views/Issues/components/IssueDetail"),
+  // },
+  // {
+  //   path: "/issues/search",
+  //   name: "issueDetail",
+  //   component: IssuesView,
+  // },
   {
     path: "/test",
     name: "test",

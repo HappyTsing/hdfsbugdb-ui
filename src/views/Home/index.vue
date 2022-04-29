@@ -11,6 +11,7 @@
           <SingleChart></SingleChart>
         </div>
       </el-col>
+
       <el-col :span="8"
         ><div class="chart-wrapper">
           <ComplexChart></ComplexChart></div
@@ -20,6 +21,7 @@
     <TableShow
       :columns_to_show="columns_to_show"
       :pageSize="pageSize"
+      :dataSource="dataSource"
     ></TableShow>
   </div>
 </template>
@@ -33,6 +35,7 @@ export default {
   data() {
     return {
       pageSize: 5,
+      dataSource: "all",
       columns_to_show: [
         {
           prop: "id",

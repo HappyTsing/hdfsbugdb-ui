@@ -45,7 +45,6 @@ export default function useEcharts(option, domID) {
     option.xAxis[0].data = typeKeys;
 
     option.series = [];
-    console.log(typeKeys);
 
     // 构建 option.series
     for (let typeKey of typeKeys) {
@@ -71,9 +70,13 @@ export default function useEcharts(option, domID) {
     getEchartData().then((res) => {
       option = initOption(option, res.data);
       let chartDom = document.getElementById(domID);
-      chart = $echarts.init(chartDom, "macarons");
-      console.log(option);
-      chart.setOption(option);
+      try {
+        chart = $echarts.init(chartDom, "macarons");
+        chart.setOption(option);
+      } catch (error) {
+        // console.log("用户切换页面，无需继续init echart！");
+        chart = null;
+      }
     });
   });
 

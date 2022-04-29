@@ -5,7 +5,7 @@
 
 <script>
 // 组合式API
-import useEcharts from "../composables/useEchartsForSingleChart.js";
+import useEcharts from "@/composables/useEchartsForSingleChart.js";
 
 export default {
   name: "LineChart",
@@ -34,15 +34,13 @@ export default {
           animationDuration: 1200,
           animationEasing: "cubicInOut",
           itemStyle: {
-            normal: {
+            color: "#3888fa",
+            lineStyle: {
               color: "#3888fa",
-              lineStyle: {
-                color: "#3888fa",
-                width: 2,
-              },
-              areaStyle: {
-                color: "#f3f8ff",
-              },
+              width: 2,
+            },
+            areaStyle: {
+              color: "#f3f8ff",
             },
           },
         },

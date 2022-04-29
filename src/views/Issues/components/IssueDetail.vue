@@ -67,12 +67,10 @@ export default {
     const route = useRoute();
     const issueKey = route.params.IssueKey;
     let issueDetail = ref({});
-
     function getData() {
       searchIssueByIssueKey(issueKey).then((res) => {
         // issueDetail.value.length = 0;
         issueDetail.value = res.data.data[0];
-        console.log(issueDetail);
       });
     }
     onMounted(() => {

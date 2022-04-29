@@ -5,7 +5,7 @@
 
 <script>
 // 组合式API
-import useEcharts from "../composables/useEchartsForSingleChart.js";
+import useEcharts from "@/composables/useEchartsForSingleChart.js";
 
 export default {
   name: "BarChart",
@@ -32,9 +32,7 @@ export default {
           barWidth: "50%",
 
           itemStyle: {
-            normal: {
-              color: "#61bca4",
-            },
+            color: "#61bca4",
           },
         },
       ],

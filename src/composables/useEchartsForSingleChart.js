@@ -53,8 +53,6 @@ export default function useEcharts(option, domID, chartType) {
   }
   watch(dataSource, (newValue) => {
     option = initOption(option, newValue, echartData);
-    console.log(option);
-
     chart.setOption(option);
   });
 
@@ -66,8 +64,13 @@ export default function useEcharts(option, domID, chartType) {
       echartData = res.data;
       option = initOption(option, dataSource.value, res.data);
       let chartDom = document.getElementById(domID);
-      chart = $echarts.init(chartDom, "macarons");
-      chart.setOption(option);
+      try {
+        chart = $echarts.init(chartDom, "macarons");
+        chart.setOption(option);
+      } catch (e) {
+        // console.log("用户切换页面，无需继续init echart！");
+        chart = null;
+      }
     });
   });
 

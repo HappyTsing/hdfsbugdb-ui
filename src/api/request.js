@@ -1,5 +1,8 @@
 import axios from "axios";
+// 使用ElMessage需要手动导入样式
 import { ElMessage } from "element-plus";
+import "element-plus/es/components/message/style/css";
+
 // import store from "@/store";
 // import { getToken } from "@/utils/auth";
 
@@ -58,7 +61,11 @@ service.interceptors.response.use(
   },
   (error) => {
     console.log("err" + error); // for debug
-    ElMessage.error(error.message);
+    ElMessage({
+      message: error.message,
+      type: "error",
+      duration: 3000,
+    });
     return Promise.reject(error);
   }
 );

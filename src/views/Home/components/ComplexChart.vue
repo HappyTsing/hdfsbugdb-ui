@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import useEcharts from "../composables/useEchartsForComplexChart.js";
+import useEcharts from "@/composables/useEchartsForComplexChart.js";
 export default {
   name: "ComplexChart",
   setup() {
