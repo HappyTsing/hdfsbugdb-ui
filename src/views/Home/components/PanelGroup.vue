@@ -60,9 +60,10 @@
         </div>
 
         <div class="card-panel-description">
-          <!-- TODO Last update固定 -->
+          <!-- Done Last update固定 -->
           <div class="card-panel-text">Last Update</div>
-          <count-up
+          <span class="card-panel-num">2022-04-21</span>
+          <!-- <count-up
             :start-val="0"
             :end-val="21"
             :duration="3"
@@ -71,7 +72,7 @@
             <template #prefix>
               <span>2022-04-</span>
             </template>
-          </count-up>
+          </count-up> -->
         </div>
       </div>
     </el-col>

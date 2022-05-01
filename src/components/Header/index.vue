@@ -1,8 +1,9 @@
 <template>
   <header>
     <!-- 当路径为 /home 或 /issues/HDFS-14222，都取根路径，即/home和/issues -->
+    <!-- :default-active="'/' + this.$route.path.split('/')[1]" -->
     <el-menu
-      :default-active="'/' + this.$route.path.split('/')[1]"
+      :default-active="defaultActive"
       class="el-menu-demo"
       mode="horizontal"
       router
@@ -35,8 +36,22 @@ import { ElMessage } from "element-plus";
 import "element-plus/es/components/message/style/css";
 export default {
   name: "HeaderComp",
+
+  // 监听路由，实现正确菜单栏高亮
+  watch: {
+    "$route.path": {
+      handler: function (newVal) {
+        this.defaultActive = "/" + newVal.split("/")[1];
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
+  data() {
+    return { defaultActive: "/" + this.$route.path.split("/")[1] };
+  },
   setup() {
-    let input = ref("");
+    const input = ref("");
     const router = useRouter();
 
     function handleSearch() {
@@ -63,7 +78,7 @@ export default {
       {
         id: 2,
         title: "ISSUES",
-        path: "/issues/all",
+        path: "/issues",
       },
     ]);
 

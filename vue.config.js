@@ -54,7 +54,7 @@ module.exports = defineConfig({
   /* 方案二 */
   devServer: {
     proxy: {
-      "/api": {
+      "/hdfsbugdb-server/api": {
         target: "http://localhost:8081",
         ws: true, // 用于支持websocket
         changeOrigin: true, // 代理服务器 告诉 服务端 它（代理服务器） 的端口号是和服务端一样的。

@@ -20,6 +20,7 @@ const routes = [
     path: "/issues",
     name: "issues",
     component: IssuesView,
+    redirect: "/issues/all",
     children: [
       {
         path: "all",

@@ -8,7 +8,7 @@ import "element-plus/es/components/message/style/css";
 
 // 创建实例、配置基础URL
 const service = axios.create({
-  baseURL: "/api",
+  baseURL: "/hdfsbugdb-server/api",
   timeout: 10000, // request timeout
 });
 
