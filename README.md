@@ -1,6 +1,6 @@
 # 简介
 
-本项目用于毕业设计的前端显示页面
+本科毕设前端，基于 Vue3 + Element Plus + Echarts。
 
 # 快速使用
 
@@ -51,7 +51,7 @@ src 中存在如下文件夹：
 - api：axios，使用 ajax 请求后端的 api。包装一个`request.js`，设置响应拦截等。
 - assets：静态文件
 - components：组件，存放.vue 文件，一般存放全局组件。我们在`main.js`导入，并`app.component()`将其全局注册，此后可直接在 template 中以 <组件名/>的方式调用，无需在单独导入。
-- composables：响应式 api 单独抽离出来的逻辑，方便逻辑复用。命名上一般以use开头。vue3.0 引入，[参见](https://v3.cn.vuejs.org/guide/composition-api-introduction.html)
+- composables：响应式 api 单独抽离出来的逻辑，方便逻辑复用。命名上一般以 use 开头。vue3.0 引入，[参见](https://v3.cn.vuejs.org/guide/composition-api-introduction.html)
 - router：路由的信息
 - store：vuex，实现组件间数据共享。[vuex 项目架构](https://vuex.vuejs.org/zh/guide/structure.html)
 - views：同样存放.vue 文件，不同的是这里的文件都充当视图的作用，即会被路由，称为路由组件。如 about.vue，会路由到：/about。也有人将其命名为 pages。
@@ -86,7 +86,7 @@ lintOnSave: false
     - issue 的时间跨度 19/03/30 - 22/03/01
     - issue 数量 477
     - 最后更新时间
-  - 第二行：echart可视化数据
+  - 第二行：echart 可视化数据
     - 左侧：SingleChart
     - 右侧：ComplexChart
   - 第三行：TableShow
@@ -218,7 +218,7 @@ let myEcharts = $echarts.init(this.$refs.myChart);
 - tooltip：提示框组件。当你滑到相应位置的时候显示内容
 - legend：图例组件
 
-##  svg 优雅使用
+## svg 优雅使用
 
 1. 最原始的 icon 使用方式 直接嵌入 svg 代码
 
@@ -253,13 +253,12 @@ module.exports = defineConfig({
 配置完后，在 `main.js` 中导入 svg 即可使用
 
 ```html
-// main.js
-import "@/icons/svg/bug.svg";
-
-// <template>
-<svg>
-  <use xlink:href="#icon-bug"></use>
-</svg>;
+// main.js import "@/icons/svg/bug.svg"; //
+<template>
+  <svg>
+    <use xlink:href="#icon-bug"></use></svg
+  >;</template
+>
 ```
 
 但是这样做还需要每次都引入，很麻烦。因此我们抽象出一个全局组件： `@components/SygIcon/index.vue`
@@ -271,9 +270,7 @@ import "@/icons/svg/bug.svg";
     <use :xlink:href="iconName" />
   </svg>
 </template>
-export default {
-  name: "SvgIcon",
-}
+export default { name: "SvgIcon", }
 ```
 
 并且在 `@icons/index.js`中书写引入逻辑，只需要在 `main.js` 中导入该文件，以后就无需每次都导入 svg 了。
