@@ -70,7 +70,7 @@ lintOnSave: false
 
 # 项目分析
 
-![hdfsbugdb-ui.drawio](https://gitee.com/happytsing/figure-bed/raw/master/img/202205011209460.png)
+![hdfsbugdb-ui.drawio](./img/系统架构图.png)
 
 全局组件：
 
